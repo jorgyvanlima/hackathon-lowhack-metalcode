@@ -4,42 +4,82 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Metal CODE - Equipe 343</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="bg-light">
-    <header class="bg-dark text-white py-4">
-      <div class="container">
-        <h1 class="h3 mb-0">Metal CODE — Equipe 343</h1>
-        <p class="mb-0 small">Hackathon LOW CODE 2026</p>
-      </div>
+  <body class="site-body">
+    <header class="site-header">
+      <nav class="navbar navbar-dark">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <div class="logo mr-3">MC</div>
+            <div>
+              <div class="brand-name">Metal CODE</div>
+              <div class="brand-sub">Equipe 343 — Hackathon LOW CODE 2026</div>
+            </div>
+          </a>
+          <div>
+            <a class="btn btn-sm btn-outline-light me-2" href="https://github.com/jorgyvanlima/hackathon-lowhack-metalcode" target="_blank">Repositório</a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero text-center">
+        <div class="container">
+          <h1 class="display-4">Metal CODE</h1>
+          <p class="lead">Somos uma banda de programadores — heavy code, heavy metal.</p>
+          <p><a href="#members" class="btn btn-primary btn-lg">Conheça a Equipe</a></p>
+        </div>
+      </section>
     </header>
 
     <main class="container py-5">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <h2>Apresentação</h2>
-          <p>Somos a equipe <strong>Metal CODE</strong>, participantes do Hackathon LOW CODE 2026. Este é um projeto de apresentação inicial para demonstrar nossa presença e capacidades com arquitetura 100% em Docker e deploy via GitHub Actions.</p>
-          <p class="mt-4">Membros:</p>
-          <ul>
-            <li><a href="https://www.linkedin.com/in/jorgyvan-lima/" target="_blank">Jorgyvan Lima</a></li>
-            <li><a href="https://www.linkedin.com/in/gusttavopapini/" target="_blank">Gusttavo Papini</a></li>
-            <li><a href="https://www.linkedin.com/in/brunosantos751/" target="_blank">Bruno Santos</a></li>
-          </ul>
+      <section id="about" class="mb-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2>Apresentação</h2>
+            <p class="lead">Metal CODE é a equipe 343 no Hackathon LOW CODE 2026. Misturamos paixão por desenvolvimento, infra e performance — tudo empacotado em containers Docker e deploy automatizado.</p>
+            <p>Nosso stack: Docker, Nginx, GitHub Actions e muitas linhas de código com atitude.</p>
+          </div>
+          <div class="col-lg-6 text-center">
+            <div class="hero-art">🎸</div>
+          </div>
         </div>
-        <div class="col-md-6 text-center">
-          <img src="https://raw.githubusercontent.com/jorgyvanlima/hackathon-lowhack-metalcode/main/assets/metalcode-logo.png" alt="Metal CODE" class="img-fluid" onerror="this.style.display='none'">
+      </section>
+
+      <section id="members" class="mb-5">
+        <h3 class="mb-4">Membros</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="member-card">
+              <h4>Jorgyvan Lima</h4>
+              <a href="https://www.linkedin.com/in/jorgyvan-lima/" target="_blank" class="link-light">LinkedIn</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="member-card">
+              <h4>Gusttavo Papini</h4>
+              <a href="https://www.linkedin.com/in/gusttavopapini/" target="_blank" class="link-light">LinkedIn</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="member-card">
+              <h4>Bruno Santos</h4>
+              <a href="https://www.linkedin.com/in/brunosantos751/" target="_blank" class="link-light">LinkedIn</a>
+            </div>
+          </div>
         </div>
-      </div>
-      <hr>
-      <section>
-        <h3>Como funciona</h3>
-        <p>O projeto é empacotado em Docker. O GitHub Actions faz deploy ao servidor via SSH, faz <code>git pull</code> e roda <code>docker compose up -d --build</code>, atualizando containers automaticamente.</p>
+      </section>
+
+      <section id="how" class="mb-5">
+        <h3>Deploy & Infra</h3>
+        <p>Tudo roda em Docker. O GitHub Actions empacota e dispara atualizações na VM, que executa <code>docker compose up -d --build</code>.</p>
       </section>
     </main>
 
-    <footer class="bg-white text-center py-3 border-top">
-      <div class="container small">© Metal CODE — Hackathon LOW CODE 2026</div>
+    <footer class="site-footer text-center py-4">
+      <div>© Metal CODE — Equipe 343 • Hackathon LOW CODE 2026</div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

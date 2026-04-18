@@ -1,3 +1,35 @@
-body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-h1, h2, h3 { font-weight: 600; }
-.lead { font-size: 1.05rem; }
+:root{
+	--bg:#0b0b0b;
+	--accent-red:#e63946;
+	--accent-yellow:#f4d35e;
+	--muted:#cfcfcf;
+}
+
+body.site-body{
+	background:var(--bg);
+	color:var(--muted);
+	font-family: 'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.navbar{ background:transparent; }
+.logo{ background:var(--accent-red); color:#000; font-weight:700; width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:6px; font-family:'Oswald',sans-serif }
+.brand-name{ font-family:'Oswald',sans-serif; font-weight:700; color:var(--accent-yellow); }
+.brand-sub{ font-size:0.75rem; color:#bdbdbd }
+
+.hero{ padding:100px 0; background:linear-gradient(180deg, rgba(230,57,70,0.12), rgba(0,0,0,0.0)), radial-gradient(ellipse at center, rgba(244,211,94,0.06), transparent), url('') no-repeat center/cover; color:var(--accent-yellow); }
+.hero .display-4{ font-family:'Oswald',sans-serif; font-weight:700; color:var(--accent-yellow); text-shadow: 0 2px 0 rgba(0,0,0,0.6), 0 6px 24px rgba(230,57,70,0.08); }
+.hero .lead{ color:#ffdca1; font-size:1.1rem }
+.hero-art{ font-size:96px; filter:drop-shadow(0 6px 12px rgba(0,0,0,0.6)); }
+
+.member-card{ background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06)); border-left:4px solid var(--accent-red); padding:20px; margin-bottom:16px; border-radius:8px }
+.member-card h4{ color:#fff; margin-bottom:8px; font-family:'Oswald',sans-serif }
+.member-card a{ color:var(--accent-yellow); text-decoration:none }
+
+.site-footer{ background:transparent; color:#9e9e9e }
+
+/* buttons */
+.btn-primary{ background:var(--accent-red); border-color:var(--accent-red); }
+.btn-primary:hover{ background:#b82b2f; border-color:#b82b2f }
+
+@media (max-width:768px){ .hero{ padding:60px 0 } }
+
