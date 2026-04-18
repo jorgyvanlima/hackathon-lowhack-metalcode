@@ -8,17 +8,24 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
     steps:
       - name: Checkout repositório
         uses: actions/checkout@v4
+
+      - name: Write SSH key (from base64 secret)
+        run: |
+          printf "%s" "${{ secrets.SSH_PRIVATE_KEY_B64 }}" | base64 -d > .ssh_deploy_key
+          chmod 600 .ssh_deploy_key
 
       - name: Deploy via SSH (appleboy)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key_path: .ssh_deploy_key
           port: 22
           script: |
             set -e
