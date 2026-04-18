@@ -1,48 +1,66 @@
 # Metal CODE — Equipe 343
 
-Página de apresentação da equipe Metal CODE para o Hackathon LOW CODE 2026.
+Descrição
+Projeto do time Metal CODE para o Hackathon LowHack 2026. Site estático servido por Nginx dentro de container Docker, com pipeline de deploy via GitHub Actions.
 
 Visão rápida
-- Projeto 100% Docker (Nginx servindo página estática)
-- Deploy automático via GitHub Actions (SSH para a VM) com `docker compose up -d --build`
+- Aplicação estática em `site/` servida por Nginx
+- Conteinerizada com `Dockerfile` e orquestrada por `docker-compose.yml`
+- Deploy automático via GitHub Actions (SSH para VM) opcional
 
-Estrutura
-- `Dockerfile` — imagem baseada em `nginx` com site estático
-- `docker-compose.yml` — orquestra o serviço `web`
-- `nginx.conf` — configuração do servidor
-- `site/` — HTML/CSS/ativos da página
-- `.github/workflows/deploy.yml` — pipeline de deploy (SSH)
+Estrutura do repositório
+- `Dockerfile` — imagem baseada em Nginx para servir os arquivos estáticos
+- `docker-compose.yml` — define o serviço `web`
+- `nginx.conf` — configuração do Nginx
+- `site/` — conteúdo estático (HTML, CSS, imagens)
+- `.github/workflows/` — workflows de CI/CD (deploy)
 
 Como rodar localmente
 
-1. Build e rodar com docker-compose:
+1. Build e executar com Docker Compose:
 
 ```bash
 docker compose up -d --build
 ```
 
-2. Abrir `http://localhost` no navegador.
+2. Abra `http://localhost` no navegador.
 
-GitHub Actions & Deploy remoto
+Como publicar no GitHub (fluxo básico)
 
-Requisitos no servidor remoto (VM):
-- Docker instalado e em execução
-- `docker compose` disponível (plugin compose v2)
-- Repositório já clonado no caminho definido no Secret `SSH_PATH`
+1. Adicione e comite as mudanças locais:
 
-Secrets necessários no GitHub (Settings → Secrets and variables → Actions):
-- `SSH_PRIVATE_KEY` — chave privada para SSH
+```bash
+git add README.md
+git commit -m "Atualiza README"
+```
+
+2. Envie (push) para o repositório remoto configurado:
+
+```bash
+git push
+```
+
+Deploy via GitHub Actions (exigências)
+
+No repositório GitHub, configure os Secrets abaixo (Settings → Secrets and variables → Actions):
+- `SSH_PRIVATE_KEY` — chave privada para acessar a VM
 - `SSH_USER` — usuário da VM (ex.: `jorgyvan_lima`)
-- `SSH_HOST` — IP público da VM
-- `SSH_PATH` — caminho do repositório na VM (ex.: `/home/jorgyvan_lima/hackathon-lowhack-metalcode`)
+- `SSH_HOST` — IP ou host da VM
+- `SSH_PATH` — caminho do repositório na VM (ex.: `/home/jorgyvan_lima/hackthon-lowhack-metalcode`)
 
-O workflow fará `git pull` e executará `docker compose up -d --build` na VM.
+No servidor (VM), verifique:
+- Docker instalado e em execução
+- `docker compose` (plugin v2) disponível
+
+O workflow típico fará `git pull` no servidor e executará `docker compose up -d --build`.
 
 Observações de segurança
-- Nunca exponha tokens ou chaves em canais públicos. Revogue tokens vazados.# Hackathon LowHack - Metalcode
+- Não exponha chaves ou tokens publicamente.
+- Use chaves SSH com passphrase e gerencie acessos via GitHub.
 
-Repositório base do hackathon.
+Contato
+- Maintainer: Metal CODE — equipe 343
 
-Infra:
-- Google Cloud VM (Ubuntu 22.04)
-- Deploy automático via GitHub Actions
+---
+
+Arquivo `site/` contém a página estática principal; ver [site/index.html](site/index.html) para conteúdo.
