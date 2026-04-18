@@ -22,7 +22,27 @@ jobs:
 
       - name: Deploy na VM Google Cloud
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            set -e
             cd ${{ secrets.SSH_PATH }}
-            git pull origin main
+            echo "Pulling latest changes"
+            git pull origin main || true
+
+            # Instalar Docker se não existir
+            if ! command -v docker >/dev/null 2>&1; then
+              echo "Docker não encontrado. Instalando..."
+              sudo apt-get update -y
+              sudo apt-get install -y docker.io
+              sudo systemctl enable --now docker
+            fi
+
+            # Instalar plugin docker compose se necessário
+            if ! docker compose version >/dev/null 2>&1; then
+              echo "Docker Compose (plugin) não encontrado. Instalando..."
+              sudo apt-get install -y docker-compose-plugin || true
+            fi
+
+            # Build e subir containers
+            echo "Executando docker compose up -d --build"
+            sudo docker compose up -d --build
           EOF
