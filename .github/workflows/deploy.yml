@@ -13,17 +13,14 @@ jobs:
       - name: Checkout repositório
         uses: actions/checkout@v4
 
-      - name: Setup SSH (manual)
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Deploy na VM Google Cloud
-        run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+      - name: Deploy via SSH (appleboy)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
             set -e
             cd ${{ secrets.SSH_PATH }}
             echo "Pulling latest changes"
@@ -43,7 +40,5 @@ jobs:
               sudo apt-get install -y docker-compose-plugin || true
             fi
 
-            # Build e subir containers
             echo "Executando docker compose up -d --build"
             sudo docker compose up -d --build
-          EOF
